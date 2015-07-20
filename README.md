@@ -23,23 +23,23 @@ firewalld_allow_services:
 
 Only service is required!
 
-firewalld_allow_ports:
-  port: <port/protocol>
-  zone: [zone]			(default: public)
-  permanent: [True|False]	(default: True)
-  state: [enabled|disabled]	(default: enabled)
+    firewalld_allow_ports:
+      port: <port/protocol>
+      zone: [zone]			(default: public)
+      permanent: [True|False]	(default: True)
+      state: [enabled|disabled]	(default: enabled)
 
 
 Example Playbook
 ----------------
 
-  - hosts: servers
-    vars:
-      firewalld_allow_services:
-      - { service: "http" }
-      - { service: "telnet", zone: "dmz", permanent: True, state: "disabled" }
-    roles:
-    - marcelnijenhof.firewalld
+    - hosts: servers
+      vars:
+        firewalld_allow_services:
+        - { service: "http" }
+        - { service: "telnet", zone: "dmz", permanent: True, state: "disabled" }
+      roles:
+      - marcelnijenhof.firewalld
 
 
 License
