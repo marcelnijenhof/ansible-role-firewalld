@@ -15,6 +15,7 @@ There are two hashes:
  - firewalld_allow_services
  - firewalld_allow_ports
 
+Values for firewalld_allow_services:
     firewalld_allow_services:
       service: <service name>
       zone: [zone]			(default: public)
@@ -23,6 +24,7 @@ There are two hashes:
 
 Only service is required!
 
+Values for firewalld_allow_ports:
     firewalld_allow_ports:
       port: <port/protocol>
       zone: [zone]			(default: public)
