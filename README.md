@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Uses firewalld on CentOS/Redhat 7 or fedore 21/22 to configure the firewall
+Uses firewalld on CentOS/Redhat 7 or Fedora 21/22 to configure the firewall
 
 Requirements
 ------------
