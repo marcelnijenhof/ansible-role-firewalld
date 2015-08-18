@@ -1,4 +1,10 @@
 ---
+- name: Install firewalld package
+  yum: pkg=firewalld state=present
+
+- name: Ensure firewalld is running and enabled on boot
+  service: name=firewalld state=started enabled=yes
+
 - name: Add firewalld rules for services from vars
   firewalld:
     service={{ item.service }}
