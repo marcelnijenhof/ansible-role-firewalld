@@ -1,6 +1,4 @@
 ---
-- name: firewalld reload
-  service:
-    name: "firewalld"
-    state: "reloaded"
-
+# 'service reload' was not always working, needs complete reload
+- name: firewalld complete reload
+  command: firewall-cmd --complete-reload
