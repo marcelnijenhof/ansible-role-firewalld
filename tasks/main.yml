@@ -12,7 +12,7 @@
     permanent={{ item.permanent | default (True) }}
     state={{ item.state | default ("enabled") }}
   with_items: "{{ firewalld_allow_services }}"
-  notify: firewalld reload
+  notify: firewalld complete reload
 - name: Add firewalld rules for ports from vars
   firewalld:
     port={{ item.port }}
@@ -20,4 +20,4 @@
     permanent={{ item.permanent | default (True) }}
     state={{ item.state | default ("enabled") }}
   with_items: "{{ firewalld_allow_ports }}"
-  notify: firewalld reload
+  notify: firewalld complete reload
