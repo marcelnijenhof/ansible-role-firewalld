@@ -40,10 +40,21 @@ Example Playbook
     - hosts: servers
       vars:
         firewalld_allow_services:
-        - { service: "http" }
-        - { service: "telnet", zone: "dmz", permanent: True, state: "disabled" }
+          - { service: "http" }
+          - { service: "telnet", zone: "dmz", permanent: True, state: "disabled" }
       roles:
-      - marcelnijenhof.firewalld
+        - marcelnijenhof.firewalld
+
+Disable firewalld service example
+---------------------------------
+
+    - hosts: servers
+      vars:
+        firewalld_allow_services:
+          - { firewalld_disable: true }
+      roles:
+        - marcelnijenhof.firewalld
+
 
 
 License
