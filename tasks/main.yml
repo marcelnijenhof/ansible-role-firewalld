@@ -17,9 +17,10 @@
       interface={{ item.interface }}
       state={{ item.state | default ("enabled") }}
       permanent={{ item.permanent | default (True) }}
-    with_items: {{ firewalld_zones }}
-    notify: firewalld complete reload
-    when: firewalld_disable == false
+      immediate={{ item.immediate | default (True) }}
+  with_items: "{{ firewalld_zones }}"
+  notify: firewalld complete reload
+  when: firewalld_disable == false
 
 - name: Add firewalld rules for services from vars
   firewalld:
@@ -27,6 +28,7 @@
     zone={{ item.zone | default ("public") }}
     permanent={{ item.permanent | default (True) }}
     state={{ item.state | default ("enabled") }}
+    immediate={{ item.immediate | default (True) }}
   with_items: "{{ firewalld_allow_services }}"
   notify: firewalld complete reload
   when: firewalld_disable == false
@@ -37,6 +39,7 @@
     zone={{ item.zone | default ("public") }}
     permanent={{ item.permanent | default (True) }}
     state={{ item.state | default ("enabled") }}
+    immediate={{ item.immediate | default (True) }}
   with_items: "{{ firewalld_allow_ports }}"
   notify: firewalld complete reload
   when: firewalld_disable == false
