@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Marcel Nijenhof
-  description: A module to configure firewalld through variables
+  description: A module to configure firewalld zones and rules through variables
   license: BSD
   min_ansible_version: 1.4
   platforms:
