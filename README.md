@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Uses firewalld on CentOS/Redhat 7 or Fedora 21/22 to configure the firewall, featuring support for configuring zones
+Uses firewalld on CentOS/Redhat 7 or Fedora 21/22 to configure the firewall zones and rules
 
 Requirements
 ------------
@@ -82,4 +82,4 @@ BSD
 Author Information
 ------------------
 
-Michael Varian (mike@northskytech.com).  Forked from original role written by Marcel Nijenhof (marceln@pion.xs4all.nl).
+Written by Marcel Nijenhof (marceln@pion.xs4all.nl).

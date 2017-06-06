@@ -1,8 +1,7 @@
 ---
 galaxy_info:
-  author: Michael Varian
-  company: NorthSky Technology www.northskytech.com
-  description: A module to configure firewalld through variables, with zone support
+  author: Marcel Nijenhof
+  description: A module to configure firewalld zones and rules through variables
   license: BSD
   min_ansible_version: 1.4
   platforms:
