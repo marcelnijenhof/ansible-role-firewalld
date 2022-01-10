@@ -10,21 +10,48 @@
   service: name=firewalld state=stopped enabled=no
   when: firewalld_disable == true
 
+- name: Configure firewalld zones from vars
+  firewalld:
+    zone: "{{ item.zone }}"
+    state: "{{ item.state | default (present) }}"
+    permanent: "{{ item.permanent | default (True) }}"
+  loop: "{{ firewalld_zones }}"
+  notify:
+    - "change interface zone" #MonkeyPatch : Fail to permanently change zone for interface via ansible firewalld module
+    - "firewalld complete reload"
+  when: firewalld_disable == false
+
+- meta: flush_handlers
+
+- name: Add firewalld rules for sources from vars
+  firewalld:
+    source: "{{ item.source }}"
+    zone: "{{ item.zone | default (public) }}"
+    permanent: "{{ item.permanent | default (True) }}"
+    state: "{{ item.state | default (enabled) }}"
+    immediate: "{{ item.immediate | default (True) }}"
+  loop: "{{ firewalld_allow_sources }}"
+  notify: firewalld complete restart
+  when: firewalld_disable == false and item.source is defined
+
 - name: Add firewalld rules for services from vars
   firewalld:
-    service={{ item.service }}
-    zone={{ item.zone | default ("public") }}
-    permanent={{ item.permanent | default (True) }}
-    state={{ item.state | default ("enabled") }}
-  with_items: "{{ firewalld_allow_services }}"
-  notify: firewalld complete reload
-  when: firewalld_disable == false
+    service: "{{ item.service }}"
+    zone: "{{ item.zone | default (public) }}"
+    permanent: "{{ item.permanent | default (True) }}"
+    state: "{{ item.state | default (enabled) }}"
+    immediate: "{{ item.immediate | default (True) }}"
+  loop: "{{ firewalld_allow_services }}"
+  notify: firewalld complete restart
+  when: firewalld_disable == false and item.service is defined
+
 - name: Add firewalld rules for ports from vars
   firewalld:
-    port={{ item.port }}
-    zone={{ item.zone | default ("public") }}
-    permanent={{ item.permanent | default (True) }}
-    state={{ item.state | default ("enabled") }}
-  with_items: "{{ firewalld_allow_ports }}"
-  notify: firewalld complete reload
-  when: firewalld_disable == false
+    port: "{{ item.port }}"
+    zone: "{{ item.zone | default (public) }}"
+    permanent: "{{ item.permanent | default (True) }}"
+    state: "{{ item.state | default (enabled) }}"
+    immediate: "{{ item.immediate | default (True) }}"
+  loop: "{{ firewalld_allow_ports }}"
+  notify: firewalld complete restart
+  when: firewalld_disable == false and item.port is defined

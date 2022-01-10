@@ -1,4 +1,18 @@
 ---
+- name: change interface zone
+  ansible.builtin.command:
+    argv:
+      - /usr/bin/firewall-cmd
+      - "--change-interface={{ item.interface }}"
+      - --permanent
+      - --zone={{ item.zone }}
+  with_items: "{{ firewalld_zones }}"
+
 # 'service reload' was not always working, needs complete reload
 - name: firewalld complete reload
   command: firewall-cmd --complete-reload
+
+- name: firewalld complete restart
+  ansible.builtin.service:
+    name: firewalld
+    state: restarted
