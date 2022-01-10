@@ -11,10 +11,21 @@ The ansible module firewalld is used for the configuration.
 Role Variables
 --------------
 
-There are three hashes:
+There are four hashes:
+ - firewalld_zone
  - firewalld_allow_sources
  - firewalld_allow_services
  - firewalld_allow_ports
+
+Values for firewalld_zones:
+
+    firewalld_zones:
+      zone: [zone]
+      permanent: [True|False] (default: True)
+      state: [present|absent] (default: present)
+      interface: [interface]
+
+interface parameter is used in the handler.
 
 Values for firewalld_allow_sources:
 
